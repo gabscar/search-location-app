@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Card from '../../components/CardSearch/Card';
 
 
-export default function SearchScreen(){
+export default function SearchScreen({navigation}){
     const [errorMessage, setErrorMessage] = useState(null);
     const [city, setCity] = useState("");
     const [color,setColor]= useState('#E3E6E8');
@@ -22,15 +22,15 @@ export default function SearchScreen(){
         try{
             const response = await fetch(url);
             const result = await response.json();
-           
             const {components} = result.results[0];
             const {geometry} = result.results[0];
-
+            
+            const {city, country, country_code} = components;
             dispatch(CityActions.addCity({components,geometry}));
 
-            console.log(components, geometry)
             
-
+            setCity('');
+            navigation.push("Details")
         }catch(err){
             setErrorMessage('Localização inválida');
             setColor('red');
@@ -67,6 +67,7 @@ export default function SearchScreen(){
             <Text style={styles.title}>Type Your Location Here</Text>
             <TextInput 
                 style={styles.Input}
+                value={city}
                 onChangeText ={city=>setCity(city)}
                 placeholder="Local"
                 borderColor={color}
@@ -91,8 +92,9 @@ export default function SearchScreen(){
                 />
             </View>
             <ScrollView style={styles.scrollCity}> 
+                <Text style={styles.scrollTitle}>Previous Searches</Text>
                     {recentSearch.map((city)=>(
-                        <Card/>
+                        <Card props={city} />
                     ))}
             </ScrollView>
         </View>

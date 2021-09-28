@@ -13,6 +13,17 @@ const citySlice = createSlice({
             if(state.cityList.length> 3){
                 state.cityList.pop();
             }
+        },
+        relocateCity(state,action){
+            const relocated = action.payload;
+            let AuxList = state.cityList.map((item)=>{
+                console.log(item)
+                return item.components != relocated.components
+            });
+            state.cityList.unshift(relocated);
+            if(state.cityList.length> 3){
+                state.cityList.pop();
+            }
         }
     }
 })

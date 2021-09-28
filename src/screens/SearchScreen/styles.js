@@ -49,6 +49,13 @@ export const styles = StyleSheet.create({
     scrollCity: {  
         flex:1,  
         height:'100%',
-        marginTop:10
+        marginTop:15
     },
+    scrollTitle:{
+        marginTop:15,
+        fontSize: 24,
+        fontWeight:'bold',
+        marginLeft:15,
+        marginBottom: 4
+    }
 })
