@@ -6,12 +6,15 @@ import {CityActions} from '../../store/city-slice';
 
 import {styles} from './styles'
 
-export default function Card({props}){
+export default function Card({props,navigation}){
     const dispatch = useDispatch()
     function handleClickButton(){
         const {components,geometry}=props;
-        dispatch(CityActions.relocateCity({components,geometry}))
+        dispatch(CityActions.addCity({components,geometry}));
+        
+        navigation.push("Details");
     }
+    console.log(props)
     return(
         <View style = {styles.card}>
             

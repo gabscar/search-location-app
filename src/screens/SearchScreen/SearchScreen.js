@@ -94,7 +94,7 @@ export default function SearchScreen({navigation}){
             <ScrollView style={styles.scrollCity}> 
                 <Text style={styles.scrollTitle}>Previous Searches</Text>
                     {recentSearch.map((city)=>(
-                        <Card props={city} />
+                        <Card props={city} navigation ={navigation} />
                     ))}
             </ScrollView>
         </View>
